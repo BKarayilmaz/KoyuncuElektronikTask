@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kategori İşlemleri</h1>
+<button id="btngetlist" class="btn btn-primary">Kategorileri Listele</button>
+<button id="btnadddata" class="btn btn-info">Kategori Ekle</button>
+<br />
+<br />
+<div id="categorylist">
+</div>
+<div id="categoryadd">
+    <input type="hidden" class="form-control" id="txtcategoryid" placeholder="Kategori ID" />
+    <br />
+    <input type="text" class="form-control" id="txtcategoryname" placeholder="Kategori İsmi" />
+    <br />
+    <input type="text" class="form-control" id="txtcategorydescription" placeholder="Kategori Açıklaması" />
+    <br />
+</div>
+<script>
+
+    $("#btngetlist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Category/Categories/",
+            success: function (func) {
+                let c=jQuery.parseJSON(func)
+                console.log(c);
+                let tableHtml = "<table class=table table-bordered><tr><th>Id</th><th>Category Name</th><th>Description</th></tr>";
+                $.each(c, (index, value) => {
+                    tableHtml += `<tr><td>${value.CategoryID}</td><td>${value.CategoryName}</td><td>${value.CategoryDescription}</td></tr>`
+                });
+                tableHtml += "</table>"
+                $("#categorylist").html(tableHtml);
+            }
+        });
+    });
+
+    $("#btnadddata").click(function () {
+
+        let newCategory = {
+            CategoryID: $("#txtcategoryid").val(),
+            CategoryName: $("#txtcategoryname").val(),
+            CategoryDescription: $("#txtcategorydescription").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Category/AddCategory/",
+            data: newCategory,
+            success: function (func) {
+                let result = jQuery.parseJSON(func);
+                alert("Kategori Ekleme İşlemi Başarılı Bir Şekilde Gerçekleşti.");
+                document.getElementById('txtcategoryname').value = '';
+                document.getElementById('txtcategorydescription').value = '';
+            }
+        })
+    })
+
+</script>

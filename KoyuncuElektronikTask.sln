@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoyuncuElektronikTask", "KoyuncuElektronikTask\KoyuncuElektronikTask.csproj", "{74AC170E-83E1-4D28-B1CD-84596C2C079F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74AC170E-83E1-4D28-B1CD-84596C2C079F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74AC170E-83E1-4D28-B1CD-84596C2C079F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74AC170E-83E1-4D28-B1CD-84596C2C079F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74AC170E-83E1-4D28-B1CD-84596C2C079F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C477A252-C355-446F-A3A7-8BE2C73BB513}
+	EndGlobalSection
+EndGlobal

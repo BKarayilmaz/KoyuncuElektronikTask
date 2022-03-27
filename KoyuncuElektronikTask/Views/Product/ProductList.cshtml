@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ürün Ekranı</h1>
+<button id="btngetlist" class="btn btn-primary">Ürünleri Listele</button>
+<button id="btnadddata" class="btn btn-info">Ürün Ekle</button>
+<br />
+<br />
+<div id="productlist">
+</div>
+<div id="productadd">
+    <input type="hidden" class="form-control" id="txtproductid" placeholder="Kategori ID" />
+    <br />
+    <input type="text" class="form-control" id="txtproductname" placeholder="Ürün İsmi" />
+    <br />
+    <input type="text" class="form-control" id="txtproductdescription" placeholder="Ürün Açıklaması" />
+    <br />
+    <input type="text" class="form-control" id="txtproductprice" placeholder="Ürün Fiyatı" />
+    <br />
+    <input type="text" class="form-control" id="txtproductstock" placeholder="Ürün Stok" />
+    <br />
+    <input type="text" class="form-control" id="txtcategoryid" placeholder="Kategori ID" />
+    <br />
+</div>
+<script>
+
+    $("#btngetlist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Product/Products/",
+            success: function (func) {
+                let c = jQuery.parseJSON(func)
+                console.log(c);
+                let tableHtml = "<table class=table table-bordered><tr><th>Id</th><th>Product Name</th><th>Description</th><th>Price</th><th>Stock</th></tr>";
+                $.each(c, (index, value) => {
+                    tableHtml += `<tr><td>${value.ProductID}</td><td>${value.ProductName}</td><td>${value.Description}</td><td>${value.Price}</td><td>${value.Stock}</td></tr>`
+                });
+                tableHtml += "</table>"
+                $("#productlist").html(tableHtml);
+            }
+        });
+    });
+
+    $("#btnadddata").click(function () {
+
+        let newProduct = {
+            ProductID: $("#txtproductid").val(),
+            ProductName: $("#txtproductname").val(),
+            Description: $("#txtproductdescription").val(),
+            Price: $("#txtproductprice").val(),
+            Stock: $("#txtproductstock").val(),
+            CategoryID: $("#txtcategoryid").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Product/AddProduct/",
+            data: newProduct,
+            success: function (func) {
+                let result = jQuery.parseJSON(func);
+                alert("Ürün Ekleme İşlemi Başarılı Bir Şekilde Gerçekleşti.");
+                document.getElementById('txtproductname').value = '';
+                document.getElementById('txtproductdescription').value = '';
+                document.getElementById('txtproductprice').value = '';
+                document.getElementById('txtproductstock').value = '';
+                document.getElementById('txtcategoryid').value = '';
+            }
+        })
+    })
+
+</script>
